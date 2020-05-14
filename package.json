@@ -10,7 +10,6 @@
       "access_heart_rate"
     ],
     "buildTargets": [
-      "higgs",
       "meson",
       "gemini",
       "mira"
