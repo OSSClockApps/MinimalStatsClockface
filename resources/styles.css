@@ -1,0 +1,83 @@
+.background {
+  viewport-fill: black;
+  font-family: Colfax-Medium;
+
+}
+
+#dateText {
+  font-size: 25;
+  text-length: 45;
+  text-anchor: middle;
+  x: 50%;
+  y: 10%;
+  fill: gray;
+}
+
+#hoursText {
+  font-size: 180;
+  text-length: 15;
+  text-anchor: middle;
+  x: 32%;
+  y: 58%;
+  fill: lightcoral;
+}
+
+#minutesText {
+  font-size: 90;
+  text-length: 15;
+  text-anchor: middle;
+  x: 32%;
+  y: 85%;
+  fill: lightskyblue;
+}
+
+#right{
+  x: 82%;
+}
+
+#right text{
+  font-size: 25;
+  text-anchor: middle;
+}
+
+.unit{
+  fill: gray;
+  y: 8%;
+  opacity: 0.75;
+}
+
+#batteryText {
+  x: 1%;
+  y: 35%;
+  fill: white;
+  text-length: 4;
+}
+
+#steps{
+  y: 50%;
+}
+
+#stepsText {
+  y: 0%;
+  fill: snow;
+  text-length: 7;
+}
+
+#steps .unit{
+  text-length: 5;
+}
+
+#heartRate{
+  y: 70%;
+}
+
+#heartRateText {
+  y: 0%;
+  fill: firebrick;
+  text-length: 3;
+}
+
+#heartRate .unit{
+  text-length: 3;
+}
+

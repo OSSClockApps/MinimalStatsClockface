@@ -1,0 +1,31 @@
+{
+  "fitbit": {
+    "appUUID": "8b5cf34d-684d-4691-ac15-3c0a1b2468d1",
+    "appType": "clockface",
+    "appDisplayName": "Clockface_2",
+    "iconFile": "resources/icon.png",
+    "wipeColor": "",
+    "requestedPermissions": [
+      "access_activity",
+      "access_heart_rate"
+    ],
+    "buildTargets": [
+      "higgs",
+      "meson",
+      "gemini",
+      "mira"
+    ],
+    "i18n": {
+      "en": {
+        "name": "MinimalStats"
+      },
+      "de": {
+        "name": "MinimalStats"
+      }
+    },
+    "defaultLanguage": "en-US"
+  },
+  "devDependencies": {
+    "@fitbit/sdk": "~4.1.0"
+  }
+}

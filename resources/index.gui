@@ -1,0 +1,17 @@
+<svg class="background">
+  <text id="dateText" />
+  <text id="hoursText" />
+  <text id="minutesText" />
+  <svg id="right">
+    <text id="batteryText"/>
+    
+    <svg id="steps">
+      <text id="stepsText"/>
+      <text id="stepsUnit" class="unit"/>
+    </svg>
+    <svg id="heartRate">
+      <text id="heartRateText"/>
+     <text id="heartRateUnit" class="unit"/>
+    </svg>
+  </svg>
+</svg>
