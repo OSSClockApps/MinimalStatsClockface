@@ -4,8 +4,9 @@ import { preferences } from "user-settings";
 import { HeartRateSensor } from "heart-rate";
 import { battery } from "power";
 import { locale } from "user-settings";
-  import { today } from 'user-activity';
+import { today as todayActivity } from 'user-activity';
 import * as util from "../common/utils";
+import {me as appbit} from "appbit";
 
 // Update the clock every minute
 clock.granularity = "seconds";
@@ -53,9 +54,19 @@ clock.ontick = (evt) => {
   }else{
     bElem.style.fill = "firebrick";
   }
-  if(today.adjusted != null){
-    sElem.text = today.adjusted.steps;
+  if(todayActivity.adjusted != null){
+    let steps = todayActivity.adjusted.steps;
+    let stepsText = "";
+    if(steps > 1000){
+      let thousands = Math.floor(steps/1000);
+      stepsText += thousands;
+      stepsText += ".";
+      steps = steps - 1000*thousands;
+    }
+    stepsText += steps;
+    sElem.text = stepsText;
   }else{
     sElem.text = "--";
   }
+  
 }

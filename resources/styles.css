@@ -14,7 +14,7 @@
 }
 
 #hoursText {
-  font-size: 180;
+  font-size: 160;
   text-length: 15;
   text-anchor: middle;
   x: 32%;
@@ -23,7 +23,7 @@
 }
 
 #minutesText {
-  font-size: 90;
+  font-size: 85;
   text-length: 15;
   text-anchor: middle;
   x: 32%;
@@ -32,7 +32,7 @@
 }
 
 #right{
-  x: 82%;
+  x: 83%;
 }
 
 #right text{
