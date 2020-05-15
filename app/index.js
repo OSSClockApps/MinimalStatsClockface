@@ -29,7 +29,17 @@ hrs.start();
 // Update the <text> element every tick with the current time
 clock.ontick = (evt) => {
   let today = evt.date;
-  dElem.text = util.getWeekDay(today.getDay(),locale)+ " "+ today.getDate() + "." + (today.getMonth()+1) + "." + today.getFullYear();
+  let date = today.getDate();
+  let month = today.getMonth()+1;
+  let year = today.getFullYear();
+  let dateText = util.getWeekDay(today.getDay(), locale) + " ";
+  console.log(locale.language);
+  if(locale.language == "en-us"){
+    dateText += month + "." + date + "." + year;
+  }else{
+    dateText += date + "." + month + "." + year;
+  }
+  dElem.text = dateText;
   let hours = today.getHours();
   if (preferences.clockDisplay === "12h") {
     // 12h format
