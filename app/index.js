@@ -72,6 +72,12 @@ clock.ontick = (evt) => {
       stepsText += thousands;
       stepsText += ".";
       steps = steps - 1000*thousands;
+      if(steps < 10){
+        stepsText += "0";
+      }
+      if(steps < 100){
+        stepsText += "0";
+      }
     }
     stepsText += steps;
     sElem.text = stepsText;
