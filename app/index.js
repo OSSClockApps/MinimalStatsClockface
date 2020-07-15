@@ -5,10 +5,15 @@ import { HeartRateSensor } from "heart-rate";
 import { battery } from "power";
 import { locale } from "user-settings";
 import { today as todayActivity } from 'user-activity';
-import * as util from "../common/utils";
 import {me as appbit} from "appbit";
+import * as util from "../common/utils";
+import * as messaging from "messaging";
+import * as fs from "fs";
 
-// Update the clock every minute
+const SETTINGS_TYPE = "cbor";
+const SETTINGS_FILE = "settings.cbor";
+
+// Update the clock every second
 clock.granularity = "seconds";
 
 const dElem = document.getElementById("dateText");
@@ -25,6 +30,8 @@ document.getElementById("heartRateUnit").text = "BPM";
 const hrs = new HeartRateSensor();
 hrs.start();
 
+let settings = loadSettings();
+applySettings();
 
 // Update the <text> element every tick with the current time
 clock.ontick = (evt) => {
@@ -33,7 +40,6 @@ clock.ontick = (evt) => {
   let month = today.getMonth()+1;
   let year = today.getFullYear();
   let dateText = util.getWeekDay(today.getDay(), locale) + " ";
-  console.log(locale.language);
   if(locale.language == "en-us"){
     dateText += month + "." + date + "." + year;
   }else{
@@ -85,4 +91,38 @@ clock.ontick = (evt) => {
     sElem.text = "--";
   }
   
+}
+
+//Settings
+
+function applySettings(){
+  hElem.style.fill = settings.primaryColor;
+  mElem.style.fill = settings.secondaryColor;
+}
+
+messaging.peerSocket.onmessage = (evt) => {
+  if(evt.data.key == "primaryColor"){
+    settings.primaryColor = evt.data.value;
+  }else if(evt.data.key == "secondaryColor"){
+    settings.secondaryColor = evt.data.value;
+  }
+  applySettings()
+}
+
+
+appbit.onunload = saveSettings;
+
+function loadSettings(){
+  try {
+    return fs.readFileSync(SETTINGS_FILE, SETTINGS_TYPE);
+  } catch (ex) {
+    return {
+      primaryColor: "lightcoral",
+      secondaryColor: "ligthskyblue"
+    }
+  }
+}
+
+function saveSettings(){
+  fs.writeFileSync(SETTINGS_FILE, settings, SETTINGS_TYPE);
 }
