@@ -2,7 +2,7 @@
   "fitbit": {
     "appUUID": "8b5cf34d-684d-4691-ac15-3c0a1b2468d1",
     "appType": "clockface",
-    "appDisplayName": "Clockface_2",
+    "appDisplayName": "MinimalistStats",
     "iconFile": "resources/icon.png",
     "wipeColor": "",
     "requestedPermissions": [
@@ -16,13 +16,13 @@
     ],
     "i18n": {
       "en": {
-        "name": "MinimalStats"
+        "name": "MinimalistStats"
       },
       "de": {
-        "name": "MinimalStats"
+        "name": "MinimalistStats"
       }
     },
-    "defaultLanguage": "en-US"
+    "defaultLanguage": "de-DE"
   },
   "devDependencies": {
     "@fitbit/sdk": "~4.1.0"
