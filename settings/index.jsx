@@ -9,7 +9,6 @@ function Settings(props){
             {color: 'lightcoral'},
             {color: 'lightsalmon'},
             {color: 'salmon'},
-            {color: 'salmon'},
             {color: 'indianred'},
             {color: 'crimson'},
             {color: 'red'},
@@ -42,11 +41,6 @@ function Settings(props){
             {color: 'mediumblue'},
             {color: 'darkblue'},
             {color: 'navy'},
-            {color: 'midnightblue'},
-            {color: 'limegreen'},
-            {color: 'darkseagreen'},
-            {color: 'springgreen'},
-            {color: 'palegreen'},
           ]}
         />
       </Section>

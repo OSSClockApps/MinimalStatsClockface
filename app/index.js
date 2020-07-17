@@ -118,7 +118,7 @@ function loadSettings(){
   } catch (ex) {
     return {
       primaryColor: "lightcoral",
-      secondaryColor: "ligthskyblue"
+      secondaryColor: "lightskyblue",
     }
   }
 }
