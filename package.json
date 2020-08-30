@@ -1,4 +1,12 @@
 {
+  "name": "MinimalistStats",
+  "version": "2.0.1",
+  "private": true,
+  "license": "MIT",
+  "devDependencies": {
+    "@fitbit/sdk": "~4.1.0",
+    "@fitbit/sdk-cli": "^1.7.2"
+  },
   "fitbit": {
     "appUUID": "8b5cf34d-684d-4691-ac15-3c0a1b2468d1",
     "appType": "clockface",
@@ -24,7 +32,8 @@
     },
     "defaultLanguage": "de-DE"
   },
-  "devDependencies": {
-    "@fitbit/sdk": "~4.1.0"
+  "scripts": {
+    "build": "fitbit-build",
+    "debug": "fitbit"
   }
 }
