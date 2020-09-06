@@ -16,9 +16,19 @@ function Settings(props){
             {color: 'darkred'},
             {color: 'orange'},
             {color: 'darkorange'},
+            {color: 'gold'},
             {color: 'coral'},
             {color: 'tomato'},
-            {color: 'orangered'},            
+            {color: 'orangered'},
+            {color: 'lightgoldenrodyellow'},
+            {color: 'peachpuff'},      
+            {color: 'palegoldenrod'},
+            {color: 'greenyellow'},
+            {color: 'limegreen'},
+            {color: 'lightgreen'},
+            {color: 'springgreen'},
+            {color: 'seagreen'},
+            {color: 'teal'},
           ]}
         />
       </Section>
@@ -41,6 +51,13 @@ function Settings(props){
             {color: 'mediumblue'},
             {color: 'darkblue'},
             {color: 'navy'},
+            {color: 'aquamarine'},
+            {color: 'cyan'},
+            {color: 'lightcyan'},
+            {color: 'navajowhite'},
+            {color: 'cornsilk'},
+            {color: 'saddlebrown'},
+            {color: 'sienna'},
           ]}
         />
       </Section>
