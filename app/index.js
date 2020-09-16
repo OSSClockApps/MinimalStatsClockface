@@ -6,6 +6,8 @@ import { battery } from "power";
 import { locale } from "user-settings";
 import { today as todayActivity } from 'user-activity';
 import {me as appbit} from "appbit";
+import { display } from "display";
+import { BodyPresenceSensor } from "body-presence";
 import * as util from "../common/utils";
 import * as messaging from "messaging";
 import * as fs from "fs";
@@ -27,8 +29,36 @@ document.getElementById("stepsUnit").text = "STEPS";
 document.getElementById("heartRateUnit").text = "BPM";
 
 //HeartRateSensor
-const hrs = new HeartRateSensor();
-hrs.start();
+if (HeartRateSensor){
+  const hrs = new HeartRateSensor();
+  hrs.start();
+}else{
+  const hrs = null;
+}
+
+// Efficiency
+if (BodyPresenceSensor) {
+  const body = new BodyPresenceSensor();
+  body.addEventListener("reading", () => {
+    if (body.present) {
+      hrs.start();
+    } else {
+      hrs.stop();
+    }
+  });
+  body.start();
+  console.log(body);
+}
+
+display.addEventListener("change", () => {
+   if (display.on) {
+     hrs.start();
+   } else {
+     hrs.stop();
+   }
+});
+
+
 
 let settings = loadSettings();
 applySettings();
@@ -92,7 +122,6 @@ clock.ontick = (evt) => {
   }
   
 }
-
 //Settings
 
 function applySettings(){
