@@ -5,7 +5,7 @@ import { HeartRateSensor } from "heart-rate";
 import { battery } from "power";
 import { locale } from "user-settings";
 import { today as todayActivity } from 'user-activity';
-import {me as appbit} from "appbit";
+import { me as appbit } from "appbit";
 import { display } from "display";
 import { BodyPresenceSensor } from "body-presence";
 import * as util from "../common/utils";
@@ -29,15 +29,13 @@ document.getElementById("stepsUnit").text = "STEPS";
 document.getElementById("heartRateUnit").text = "BPM";
 
 //HeartRateSensor
-if (HeartRateSensor){
+if (HeartRateSensor) {
   const hrs = new HeartRateSensor();
   hrs.start();
-}else{
-  const hrs = null;
 }
 
-// Efficiency
-if (BodyPresenceSensor) {
+// Disable HRS when watch is not on wrist
+if (BodyPresenceSensor && hrs) {
   const body = new BodyPresenceSensor();
   body.addEventListener("reading", () => {
     if (body.present) {
@@ -47,16 +45,20 @@ if (BodyPresenceSensor) {
     }
   });
   body.start();
-  console.log(body);
 }
 
-display.addEventListener("change", () => {
-   if (display.on) {
-     hrs.start();
-   } else {
-     hrs.stop();
-   }
-});
+// Disable HRS when screen is off
+if (display && hrs) {
+  display.addEventListener("change", () => {
+    if (hrs != null) {
+      if (display.on) {
+        hrs.start();
+      } else {
+        hrs.stop();
+      }
+    }
+  });
+}
 
 
 
@@ -67,12 +69,12 @@ applySettings();
 clock.ontick = (evt) => {
   let today = evt.date;
   let date = today.getDate();
-  let month = today.getMonth()+1;
+  let month = today.getMonth() + 1;
   let year = today.getFullYear();
   let dateText = util.getWeekDay(today.getDay(), locale) + " ";
-  if(locale.language == "en-us"){
+  if (locale.language == "en-us") {
     dateText += month + "." + date + "." + year;
-  }else{
+  } else {
     dateText += date + "." + month + "." + year;
   }
   dElem.text = dateText;
@@ -87,52 +89,53 @@ clock.ontick = (evt) => {
   let mins = util.monoDigits(today.getMinutes());
   hElem.text = hours;
   mElem.text = mins;
-  if(hrs.heartRate == null){
+  if (hrs.heartRate == null) {
     hrElem.text = "--";
-  }else{
+  } else {
     hrElem.text = hrs.heartRate;
   }
-  bElem.text =  battery.chargeLevel + "%";
-  if(battery.chargeLevel >= 75){
+  bElem.text = battery.chargeLevel + "%";
+  if (battery.chargeLevel >= 75) {
     bElem.style.fill = "limegreen";
-  }else if(battery.chargeLevel >= 35){
+  } else if (battery.chargeLevel >= 35) {
     bElem.style.fill = "gold";
-  }else{
+  } else {
     bElem.style.fill = "firebrick";
   }
-  if(todayActivity.adjusted != null){
+  if (todayActivity.adjusted != null) {
     let steps = todayActivity.adjusted.steps;
     let stepsText = "";
-    if(steps > 1000){
-      let thousands = Math.floor(steps/1000);
+    if (steps > 1000) {
+      let thousands = Math.floor(steps / 1000);
       stepsText += thousands;
       stepsText += ".";
-      steps = steps - 1000*thousands;
-      if(steps < 10){
+      steps = steps - 1000 * thousands;
+      if (steps < 10) {
         stepsText += "0";
       }
-      if(steps < 100){
+      if (steps < 100) {
         stepsText += "0";
       }
     }
     stepsText += steps;
     sElem.text = stepsText;
-  }else{
+  } else {
     sElem.text = "--";
   }
-  
+
 }
+
 //Settings
 
-function applySettings(){
+function applySettings() {
   hElem.style.fill = settings.primaryColor;
   mElem.style.fill = settings.secondaryColor;
 }
 
 messaging.peerSocket.onmessage = (evt) => {
-  if(evt.data.key == "primaryColor"){
+  if (evt.data.key == "primaryColor") {
     settings.primaryColor = evt.data.value;
-  }else if(evt.data.key == "secondaryColor"){
+  } else if (evt.data.key == "secondaryColor") {
     settings.secondaryColor = evt.data.value;
   }
   applySettings()
@@ -141,7 +144,7 @@ messaging.peerSocket.onmessage = (evt) => {
 
 appbit.onunload = saveSettings;
 
-function loadSettings(){
+function loadSettings() {
   try {
     return fs.readFileSync(SETTINGS_FILE, SETTINGS_TYPE);
   } catch (ex) {
@@ -152,6 +155,6 @@ function loadSettings(){
   }
 }
 
-function saveSettings(){
+function saveSettings() {
   fs.writeFileSync(SETTINGS_FILE, settings, SETTINGS_TYPE);
 }
