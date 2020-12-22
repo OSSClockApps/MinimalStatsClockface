@@ -73,7 +73,7 @@ clock.ontick = (evt) => {
   let year = today.getFullYear();
   let dateText = util.getWeekDay(today.getDay(), locale) + " ";
   if (locale.language == "en-us") {
-    dateText += month + "." + date + "." + year;
+    dateText += month + "/" + date + "/" + year;
   } else {
     dateText += date + "." + month + "." + year;
   }
